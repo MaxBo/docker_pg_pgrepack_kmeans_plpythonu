@@ -1,8 +1,8 @@
 FROM postgres:9.6
 MAINTAINER Mike Dillon <mike@appropriate.io>
 
-ENV POSTGIS_MAJOR 2.3
-ENV POSTGIS_VERSION 2.3.3+dfsg-1
+ENV POSTGIS_MAJOR 2.4
+ENV POSTGIS_VERSION 2.4.3+dfsg-2.pgdg80+1
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
@@ -16,8 +16,8 @@ COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/postgis.sh
 COPY ./update-postgis.sh /usr/local/bin
 
 
-ENV PGROUTING_MAJOR 2.3 
-ENV PGROUTING_VERSION 2.3.0-1 
+ENV PGROUTING_MAJOR 2.5 
+ENV PGROUTING_VERSION 2.5.2-1
 
 MAINTAINER Hans Kristian Flaatten <hans@starefossen.com> 
 RUN apt-get update && \
