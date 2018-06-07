@@ -21,20 +21,16 @@ RUN apt-get update && \
       libssl-dev locales locales-all
 
 
-RUN apt-get install zlib1g-dev
+RUN apt-get install zlib1g-dev acl
 
 RUN pip install wheel
 RUN pip install pgxnclient
 RUN pgxn install kmeans
 
-#RUN wget http://api.pgxn.org/dist/pg_repack/1.4.3/pg_repack-1.4.3.zip && \
-#    unzip pg_repack-1.4.3.zip && \
-#    cd pg_repack-1.4.3 && \
-#    make && \
-#    make install
 
 RUN pgxn install pg_repack
 
+RUN setfacl -R -m u:postgres:rwx /etc
 
 RUN mkdir -p /docker-entrypoint-initdb.d
 COPY ./initdb-pgxn.sh /docker-entrypoint-initdb.d/pgxn.sh
