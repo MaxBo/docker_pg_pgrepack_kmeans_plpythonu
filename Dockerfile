@@ -30,8 +30,10 @@ RUN pgxn install kmeans
 
 RUN pgxn install pg_repack
 
-RUN setfacl -R -m u:postgres:rwx /etc
+RUN setfacl -R -m u:102:rwx /etc
 
 RUN mkdir -p /docker-entrypoint-initdb.d
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+COPY ./env-data.sh /env-data.sh
 COPY ./initdb-pgxn.sh /docker-entrypoint-initdb.d/pgxn.sh
 COPY ./initdb-pgrouting.sh /docker-entrypoint-initdb.d/routing.sh
