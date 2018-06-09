@@ -33,7 +33,9 @@ RUN pgxn install pg_repack
 RUN setfacl -R -m u:102:rwx /etc
 
 RUN mkdir -p /docker-entrypoint-initdb.d
-COPY ./docker-entrypoint.sh /docker-entrypoint.sh
-COPY ./env-data.sh /env-data.sh
+ADD ./docker-entrypoint.sh /
+ADD ./env-data.sh /
 COPY ./initdb-pgxn.sh /docker-entrypoint-initdb.d/pgxn.sh
 COPY ./initdb-pgrouting.sh /docker-entrypoint-initdb.d/routing.sh
+RUN chmod +x /*.sh
+RUN chmod +x /docker-entrypoint-initdb.d/*.sh
