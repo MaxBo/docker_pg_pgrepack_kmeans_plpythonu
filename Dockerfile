@@ -26,16 +26,9 @@ RUN apt-get install zlib1g-dev acl
 RUN pip install wheel
 RUN pip install pgxnclient
 RUN pgxn install kmeans
-
-
 RUN pgxn install pg_repack
 
-RUN setfacl -R -m u:102:rwx /etc
 
-RUN mkdir -p /docker-entrypoint-initdb.d
-ADD ./docker-entrypoint.sh /
-ADD ./env-data.sh /
 COPY ./initdb-pgxn.sh /docker-entrypoint-initdb.d/pgxn.sh
 COPY ./initdb-pgrouting.sh /docker-entrypoint-initdb.d/routing.sh
-RUN chmod +x /*.sh
 RUN chmod +x /docker-entrypoint-initdb.d/*.sh
