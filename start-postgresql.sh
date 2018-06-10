@@ -6,12 +6,20 @@ set -e
 # Setup postgres CONF file
 source /env-data.sh
 
-
+if [ -z "$REPLICATE_FROM" ]; then
+	# This means this is a master instance. We check that database exists
+	echo "Setup master database"
+	source /setup-database.sh
+else
+	# This means this is a slave/replication instance.
+	echo "Setup slave database"
+	source /setup-replication.sh
+fi
 
 # If no arguments passed to entrypoint, then run postgres by default
 if [ $# -eq 0 ];
 then
-	echo "Postgres initialisation process completed .... restarting in foreground"
+	echo "Start Postgres in foreground"
 	su - postgres -c "$SETVARS $POSTGRES -D $DATADIR -c config_file=$CONF"
 fi
 
