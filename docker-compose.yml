@@ -1,0 +1,49 @@
+# docker-compose build
+# docker-compose up -d
+version: '2'
+volumes:
+  dbbackups:
+  postgis-data:
+
+services:
+  
+  db:
+    image: maxboh/postgis_pgrepack_kmeans_plpythonu:latest
+    volumes:
+      - '${LOCAL_DATA_DIR}:/var/lib/postgresql/${PG_MAJOR}/main'
+      - '${LOCAL_CONFIG_DIR}:/etc/postgresql/${PG_MAJOR}/main'
+      - '${LOCAL_BACKUPDATA_DIR}:/backups'
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASS=${POSTGRES_PASS}
+      - ALLOW_IP_RANGE=0.0.0.0/0
+      - DESTROY_DATABASE_ON_RESTART=False
+    ports:
+      - ${LOCAL_POSTGRES_PORT}:5432 
+      
+    # for the initialization of a new database 
+    # and creating new postgresql.config and pg_hba.conf files, 
+    # uncomment the following entrypoint:
+    #entrypoint: /docker-entrypoint.sh
+    
+    restart: unless-stopped
+ 
+ 
+## uncomment, if you want to start the replication database
+#  dbbackups:
+#    image: maxboh/postgis_pgrepack_kmeans_plpythonu:latest
+#    hostname: pg-backups
+#    volumes:
+#      - '${LOCAL_CONFIG_DIR}:/etc/postgresql/${PG_MAJOR}/main'
+#      - '${LOCAL_BACKUPDATA_DIR}:/backups'
+#    links:
+#      - db:db
+#    environment:
+#      - DUMPPREFIX=demo
+#      - PGUSER=docker
+#      - PGPASSWORD=docker
+#      - PGDATABASE=gis
+#      - PGPORT=5432
+#      - PGHOST=db
+#    restart: unless-stopped
