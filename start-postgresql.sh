@@ -7,7 +7,7 @@ set -e
 source /env-data.sh
 
 # Setup ssl
-source /setup-ssl.sh
+source /setup-ssl-certificates.sh
 
 # Optimize kernel
 source /optimize-kernel.sh

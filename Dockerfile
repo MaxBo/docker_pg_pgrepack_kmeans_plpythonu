@@ -32,6 +32,7 @@ ADD start-postgresql.sh /
 ADD initdb-pgxn.sh /
 ADD initdb-pgrouting.sh /
 ADD optimize-kernel.sh /
+ADD setup-ssl-certificates.sh /
 
 RUN chmod +x /*.sh
 
