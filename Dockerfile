@@ -28,9 +28,10 @@ RUN pip install pgxnclient
 RUN pgxn install --pg_config /usr/lib/postgresql/$PG_MAJOR/bin/pg_config kmeans
 RUN pgxn install --pg_config /usr/lib/postgresql/$PG_MAJOR/bin/pg_config pg_repack
 
+ADD start-postgresql.sh /
+ADD initdb-pgxn.sh /
+ADD initdb-pgrouting.sh /
 
-#COPY ./initdb-pgxn.sh /docker-entrypoint-initdb.d/pgxn.sh
-#COPY ./initdb-pgrouting.sh /docker-entrypoint-initdb.d/routing.sh
-#RUN chmod +x /docker-entrypoint-initdb.d/*.sh
+RUN chmod +x /*.sh
 
 ENTRYPOINT /start-postgresql.sh
