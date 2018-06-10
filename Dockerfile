@@ -1,6 +1,7 @@
 FROM kartoza/postgis:10.0-2.4
 MAINTAINER Max Bohnet <github.com/MaxBo>
 
+ENV PG_MAIN_VERSION 10
 ENV PG_MAJOR 10.0
 
 RUN apt-get update && \
@@ -9,9 +10,10 @@ RUN apt-get update && \
 
 
 RUN apt-get update && \
+    PG_DETAILED_VERSION="$(apt-cache madison postgresql | awk -F '|' '{print $2}' | tr -d ' ' | grep -m1 ^${PG_MAIN_VERSION})"
     apt-get install -y --no-install-recommends \
-      postgresql-contrib-$PG_MAJOR  \
-      postgresql-plpython-$PG_MAJOR \
+      postgresql-contrib=$PG_DETAILED_VERSION  \
+      postgresql-plpython=$PG_DETAILED_VERSION \
       build-essential \
       python-setuptools \
       python-pip \
