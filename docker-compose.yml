@@ -8,7 +8,7 @@ volumes:
 services:
   
   db:
-    image: maxboh/postgis_pgrepack_kmeans_plpythonu:latest
+    image: maxboh/postgis_pgrepack_kmeans_plpythonu:${PG_MAJOR}-${POSTGIS_VERSION}-${PGROUTING_VERSION}
     volumes:
       - '${LOCAL_DATA_DIR}:/var/lib/postgresql/${PG_MAJOR}/main'
       - '${LOCAL_CONFIG_DIR}:/etc/postgresql/${PG_MAJOR}/main'
