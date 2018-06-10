@@ -6,6 +6,12 @@ set -e
 # Setup postgres CONF file
 source /env-data.sh
 
+# Setup ssl
+source /setup-ssl.sh
+
+# Optimize kernel
+source /optimize-kernel.sh
+
 if [ -z "$REPLICATE_FROM" ]; then
 	# This means this is a master instance. We check that database exists
 	echo "Setup master database"
