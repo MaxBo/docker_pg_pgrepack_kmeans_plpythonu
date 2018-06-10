@@ -34,8 +34,8 @@ RUN apt-get install zlib1g-dev acl
 
 RUN pip install wheel
 RUN pip install pgxnclient
-RUN pgxn install --pg_config /usr/lib/postgresql/$PG_MAJOR/bin/pg_config kmeans
-RUN pgxn install --pg_config /usr/lib/postgresql/$PG_MAJOR/bin/pg_config pg_repack
+RUN pgxn install --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config kmeans
+RUN pgxn install --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config pg_repack
 
 ADD start-postgresql.sh /
 ADD initdb-pgxn.sh /
