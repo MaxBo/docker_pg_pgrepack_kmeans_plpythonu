@@ -31,6 +31,7 @@ RUN pgxn install --pg_config /usr/lib/postgresql/$PG_MAJOR/bin/pg_config pg_repa
 ADD start-postgresql.sh /
 ADD initdb-pgxn.sh /
 ADD initdb-pgrouting.sh /
+ADD optimize-kernel.sh /
 
 RUN chmod +x /*.sh
 
