@@ -29,6 +29,6 @@ RUN pgxn install kmeans
 RUN pgxn install pg_repack
 
 
-COPY ./initdb-pgxn.sh /docker-entrypoint-initdb.d/pgxn.sh
-COPY ./initdb-pgrouting.sh /docker-entrypoint-initdb.d/routing.sh
-RUN chmod +x /docker-entrypoint-initdb.d/*.sh
+#COPY ./initdb-pgxn.sh /docker-entrypoint-initdb.d/pgxn.sh
+#COPY ./initdb-pgrouting.sh /docker-entrypoint-initdb.d/routing.sh
+#RUN chmod +x /docker-entrypoint-initdb.d/*.sh
