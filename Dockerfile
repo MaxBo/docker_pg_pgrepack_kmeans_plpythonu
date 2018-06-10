@@ -1,7 +1,7 @@
-FROM kartoza/postgis:9.6-2.4
+FROM kartoza/postgis:10.0-2.4
 MAINTAINER Max Bohnet <github.com/MaxBo>
 
-ENV PG_MAJOR 9.6
+ENV PG_MAJOR 10.0
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
