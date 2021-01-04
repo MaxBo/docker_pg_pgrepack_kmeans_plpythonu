@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /env-data.sh
+source ./env-data.sh
 
 # This script will setup default SSL config
 

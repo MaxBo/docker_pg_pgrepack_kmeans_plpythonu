@@ -37,12 +37,24 @@ RUN pip install pgxnclient
 RUN pgxn install --mirror http://pgxn.dalibo.org --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config kmeans
 #RUN pgxn install --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config pg_repack
 
-ADD start-postgresql.sh /
-ADD initdb-pgxn.sh /
-ADD initdb-pgrouting.sh /
-ADD optimize-kernel.sh /
-ADD setup-ssl-certificates.sh /
+ADD start-postgresql.sh /scripts/
+#ADD initdb-pgxn.sh /
+#ADD initdb-pgrouting.sh /
+#ADD optimize-kernel.sh /
+ADD setup-ssl-certificates.sh /scripts/
 
-RUN chmod +x /*.sh
+RUN chmod +x /scripts/*.sh
+#RUN chown postgres:postgres ./*.sh
+#USER postgres:postgres
 
-ENTRYPOINT /start-postgresql.sh
+ENV DEFAULT_ENCODING "UTF8"
+ENV DEFAULT_COLLATION "de_DE.UTF-8"
+ENV DEFAULT_CTYPE "de_DE.UTF-8"
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASS secret
+ENV POSTGRES_DB=postgis_template
+
+ENTRYPOINT ./start-postgresql.sh
+#ENTRYPOINT ./docker-entrypoint.sh
+
+#USER postgres:postgres
