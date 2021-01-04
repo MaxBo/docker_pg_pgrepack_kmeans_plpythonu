@@ -14,13 +14,13 @@ RUN apt-get update && \
         awk -F '|' '{print $2}' | \
         tr -d ' ' | \
         grep -m1 ^${PG_MAIN_VERSION})" && \
-    PG_PLPYTHON_DETAILED_VERSION="$(apt-cache madison postgresql-plpython-${PG_MAIN_VERSION} | \
+    PG_PLPYTHON_DETAILED_VERSION="$(apt-cache madison postgresql-plpython3-${PG_MAIN_VERSION} | \
         awk -F '|' '{print $2}' | \
         tr -d ' ' | \
         grep -m1 ^${PG_MAIN_VERSION})" && \
     apt-get install -y --no-install-recommends \
       postgresql-contrib=$PG_DETAILED_VERSION  \
-      postgresql-plpython-${PG_MAIN_VERSION}=$PG_PLPYTHON_DETAILED_VERSION \
+      postgresql-plpython3-${PG_MAIN_VERSION}=$PG_PLPYTHON_DETAILED_VERSION \
       build-essential \
       python-setuptools \
       python-pip \
