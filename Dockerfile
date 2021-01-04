@@ -30,12 +30,12 @@ RUN apt-get update && \
       libssl-dev locales locales-all
 
 
-RUN apt-get install zlib1g-dev acl
+RUN apt-get install -y zlib1g-dev acl
 
 RUN pip install wheel
 RUN pip install pgxnclient
-RUN pgxn install --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config kmeans
-RUN pgxn install --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config pg_repack
+RUN pgxn install --mirror http://pgxn.dalibo.org --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config kmeans
+#RUN pgxn install --pg_config /usr/lib/postgresql/${PG_MAIN_VERSION}/bin/pg_config pg_repack
 
 ADD start-postgresql.sh /
 ADD initdb-pgxn.sh /
